@@ -1,0 +1,43 @@
+<apex:page controller="ContactPaymentsController" sidebar="false">
+	<apex:form >
+		<apex:pageBlock >
+			<apex:pageMessages />
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!save}" />
+			</apex:pageBlockButtons>
+			
+			
+            
+            <apex:repeat value="{!contacts}" var="contact">
+				
+				<apex:outputPanel id="thePanel" layout="block">
+				    <div>
+				    <apex:outputlabel value="Name:  " />
+	            	<apex:outputfield id="name" value="{!contact.name}"/ >
+	            	</div><div>
+	            	<apex:outputlabel value="TotalPaid:  " />
+	              	<apex:outputfield id="numD"  value="{!contact.Total_Paid__c}" />
+	             	</div><div> 
+	             	<apex:outputlabel value="Payment:  " />
+	             	<apex:outputfield id="payment" value="{!contact.Last_Payment_Date__c}" />
+					</div>
+				</apex:outputPanel>    
+	            
+	            
+	            <apex:pageBlockTable value="{!contact.payments__r}" var="payment">
+					<apex:column value="{!payment.name}" />
+					<apex:column headerValue="amount">
+						<apex:inputField value="{!payment.amount__c}" />
+					</apex:column>
+					<apex:column headerValue="amount">
+						<apex:inputField value="{!payment.Date__c}" />
+					</apex:column>
+					
+					
+				</apex:pageBlockTable>
+            </apex:repeat> 
+		
+		
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>
